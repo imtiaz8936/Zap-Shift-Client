@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="footer footer-horizontal footer-center bg-[#0b0b0b] text-white p-10 middle rounded-2xl">
       <div>
-        <Link>
+        <Link to="/">
           <Logo></Logo>
         </Link>
       </div>
