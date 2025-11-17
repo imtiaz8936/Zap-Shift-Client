@@ -11,3 +11,7 @@
 body {
   font-family: "Urbanist", sans-serif;
 }
+
+.middle {
+  @apply w-11/12 mx-auto;
+}
