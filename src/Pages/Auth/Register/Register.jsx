@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { imageUpload } from "../../../Utils";
 
 const Register = () => {
   const {
@@ -11,6 +12,10 @@ const Register = () => {
   const handleRegistration = async (data) => {
     const { name, image, email, password } = data;
     console.log({ name, image, email, password });
+    const imageFile = image[0];
+
+    const imgData = await imageUpload(imageFile);
+    console.log(imgData);
   };
 
   return (
