@@ -2,9 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../../Hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const Signin = () => {
   const { signIn, setUser } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -21,6 +23,7 @@ const Signin = () => {
         setUser(user);
         console.log(user);
         toast.success("Signin Successful");
+        navigate("/");
       })
       .catch((error) => {
         toast.error(error);
