@@ -6,7 +6,7 @@ import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
 
   const {
     register,
@@ -18,19 +18,23 @@ const Register = () => {
     const { name, image, email, password } = data;
     console.log({ name, image, email, password });
     const imageFile = image[0];
-    const imgData = await imageUpload(imageFile);
-    console.log(imgData);
+    const photo = await imageUpload(imageFile);
+    console.log(photo);
 
     await createUser(email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        toast.success("SignUp Successful");
+        updateUserProfile(name, photo)
+          .then(() => {
+            const user = userCredential.user;
+            console.log(user);
+            toast.success("SignUp Successful");
+          })
+          .catch((error) => {
+            toast.error(error);
+          });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        toast.error(error);
       });
   };
 
