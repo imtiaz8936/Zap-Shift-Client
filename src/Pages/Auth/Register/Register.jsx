@@ -1,8 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../../Utils";
+import { AuthContext } from "../../../Providers/AuthContext";
+import useAuth from "../../../Hooks/useAuth";
 
 const Register = () => {
+  const { name } = useAuth();
+  console.log(name);
+
   const {
     register,
     handleSubmit,
@@ -13,7 +18,6 @@ const Register = () => {
     const { name, image, email, password } = data;
     console.log({ name, image, email, password });
     const imageFile = image[0];
-
     const imgData = await imageUpload(imageFile);
     console.log(imgData);
   };
