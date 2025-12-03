@@ -4,6 +4,7 @@ import Home from "../../Pages/HomePage/Home/Home";
 import AuthLayout from "../../Layouts/AuthLayout/AuthLayout";
 import Register from "../../Pages/Auth/Register/Register";
 import Coverage from "../../Pages/Coverage/Coverage";
+import Signin from "../../Pages/Auth/Signin/Signin";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/signin",
+        Component: Signin,
       },
     ],
   },

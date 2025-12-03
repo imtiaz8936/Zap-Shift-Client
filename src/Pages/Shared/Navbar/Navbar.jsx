@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router";
 import "./Navbar.css";
 import Logo from "../../../Components/Logo/Logo";
+import useAuth from "../../../Hooks/useAuth";
 
 const Navbar = () => {
   const navLinks = (
@@ -44,6 +45,9 @@ const Navbar = () => {
       </NavLink>
     </>
   );
+
+  const { user } = useAuth();
+
   return (
     <div className="">
       <div className="navbar middle p-4 rounded-2xl mt-5">
@@ -80,14 +84,26 @@ const Navbar = () => {
             {navLinks}
           </ul>
         </div>
-        <div className="navbar-end gap-2">
-          <a className="btn">Sign In</a>
-          <div>
-            <Link to="/register" className="btn bg-primary">
-              Sign Up
+        {user ? (
+          <div className="navbar-end">
+            <Link to="" className="btn bg-primary">
+              Log Out
             </Link>
           </div>
-        </div>
+        ) : (
+          <div className="navbar-end gap-2">
+            <div>
+              <Link to="/signin" className="btn">
+                Sign In
+              </Link>
+            </div>
+            <div>
+              <Link to="/register" className="btn bg-primary">
+                Sign Up
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
