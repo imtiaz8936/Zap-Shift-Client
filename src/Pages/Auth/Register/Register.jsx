@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { imageUpload } from "../../../Utils";
 import { AuthContext } from "../../../Providers/AuthContext";
 import useAuth from "../../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
-  const { name } = useAuth();
-  console.log(name);
+  const { createUser } = useAuth();
 
   const {
     register,
@@ -20,6 +20,18 @@ const Register = () => {
     const imageFile = image[0];
     const imgData = await imageUpload(imageFile);
     console.log(imgData);
+
+    await createUser(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        toast.success("SignUp Successful");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   };
 
   return (
