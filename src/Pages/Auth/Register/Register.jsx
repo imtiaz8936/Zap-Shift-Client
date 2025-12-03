@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { imageUpload } from "../../../Utils";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const Register = () => {
   const { createUser, updateUserProfile, setUser } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -25,9 +27,9 @@ const Register = () => {
         updateUserProfile(name, photo)
           .then(() => {
             const user = userCredential.user;
-            console.log(user);
             setUser(user);
             toast.success("SignUp Successful");
+            navigate("/signin");
           })
           .catch((error) => {
             toast.error(error);
