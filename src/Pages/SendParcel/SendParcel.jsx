@@ -3,9 +3,11 @@ import { useForm, useWatch } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const SendParcel = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -50,6 +52,9 @@ const SendParcel = () => {
       }
     }
 
+    data.parcelWeight = parcelWeight;
+    data.cost = cost;
+
     Swal.fire({
       title: "Agree with the Cost?",
       text: `You will be charged ${cost} taka!`,
@@ -57,14 +62,13 @@ const SendParcel = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "I agree!",
+      confirmButtonText: "I agree",
     }).then((result) => {
       if (result.isConfirmed) {
         // save the parcel info to the database
-        // axiosSecure.post('/parcels', data)
-        //     .then(res => {
-        //         console.log('after saving parcel', res.data);
-        //     })
+        axiosSecure.post("/parcels", data).then((res) => {
+          console.log("after saving parcel", res.data);
+        });
         // Swal.fire({
         //     title: "Deleted!",
         //     text: "Your file has been deleted.",
