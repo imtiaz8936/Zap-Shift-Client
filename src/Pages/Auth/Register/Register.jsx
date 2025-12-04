@@ -4,6 +4,7 @@ import { imageUpload } from "../../../Utils";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createUser, updateUserProfile, setUser } = useAuth();
@@ -28,7 +29,14 @@ const Register = () => {
           .then(() => {
             const user = userCredential.user;
             setUser(user);
-            toast.success("SignUp Successful");
+            // toast.success("SignUp Successful");
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: "SignUp Successful",
+              showConfirmButton: false,
+              timer: 1500,
+            });
             navigate("/signin");
           })
           .catch((error) => {

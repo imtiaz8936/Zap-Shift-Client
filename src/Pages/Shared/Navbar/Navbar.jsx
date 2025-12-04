@@ -4,6 +4,7 @@ import "./Navbar.css";
 import Logo from "../../../Components/Logo/Logo";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const navLinks = (
@@ -19,6 +20,12 @@ const Navbar = () => {
         className={({ isActive }) => `${isActive ? "active-link" : ""}`}
       >
         <li>Coverage</li>
+      </NavLink>
+      <NavLink
+        to="/send-parcel"
+        className={({ isActive }) => `${isActive ? "active-link" : ""}`}
+      >
+        <li>Send Parcel</li>
       </NavLink>
       <NavLink
         to="/about-us"
@@ -53,7 +60,14 @@ const Navbar = () => {
   const handleSignout = () => {
     logOut()
       .then(() => {
-        toast.success("Logout Successful");
+        // toast.success("Logout Successful");
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "You Signed Out",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate("/signin");
       })
       .catch((error) => {

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../../Hooks/useAuth";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const Signin = () => {
   const { signIn, setUser } = useAuth();
@@ -22,7 +23,14 @@ const Signin = () => {
         const user = userCredential.user;
         setUser(user);
         console.log(user);
-        toast.success("Signin Successful");
+        // toast.success("Signin Successful");
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "SignIn Successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate("/");
       })
       .catch((error) => {
