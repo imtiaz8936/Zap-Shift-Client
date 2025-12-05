@@ -62,7 +62,6 @@ const Navbar = () => {
       .then(() => {
         // toast.success("Logout Successful");
         Swal.fire({
-          position: "top-center",
           icon: "success",
           title: "You Signed Out",
           showConfirmButton: false,

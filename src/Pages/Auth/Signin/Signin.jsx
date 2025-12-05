@@ -2,12 +2,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../../Hooks/useAuth";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const Signin = () => {
   const { signIn, setUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
@@ -25,13 +26,12 @@ const Signin = () => {
         console.log(user);
         // toast.success("Signin Successful");
         Swal.fire({
-          position: "top-center",
           icon: "success",
           title: "SignIn Successful",
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/");
+        navigate(location.state);
       })
       .catch((error) => {
         toast.error(error);
@@ -93,7 +93,7 @@ const Signin = () => {
               <a className="link link-hover">Forgot password?</a>
             </div>
             <button type="submit" className="btn btn-neutral mt-4">
-              Login
+              Sign In
             </button>
           </fieldset>
         </form>

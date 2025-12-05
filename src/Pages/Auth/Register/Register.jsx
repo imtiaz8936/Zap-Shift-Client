@@ -31,7 +31,6 @@ const Register = () => {
             setUser(user);
             // toast.success("SignUp Successful");
             Swal.fire({
-              position: "top-center",
               icon: "success",
               title: "SignUp Successful",
               showConfirmButton: false,
@@ -132,7 +131,7 @@ const Register = () => {
               <a className="link link-hover">Forgot password?</a>
             </div>
             <button type="submit" className="btn btn-neutral mt-4">
-              Login
+              Sign Up
             </button>
           </fieldset>
         </form>
